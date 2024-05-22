@@ -13,21 +13,16 @@ import java.util.List;
 
 @Entity
 @Table(name = "Denuncia")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Denuncia {
     @Id
-    private int idDenuncia;
-
-    @OneToOne
-    private Vecino denunciante;
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idDenuncia;
     private String descripcion;
-
     @Enumerated (EnumType.STRING)
     private EstadoDenuncia estadoDenuncia;
-
     @Enumerated (EnumType.STRING)
     private TipoDenuncia tipoDenuncia;
-
     private String titulo;
     private String causa;
     private String lugar;

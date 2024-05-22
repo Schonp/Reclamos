@@ -7,9 +7,10 @@ import java.util.Date;
 
 @Entity
 @Table(name = "Movimiento")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Movimiento {
     @Id
-    private int idMovimiento;
+    private Long idMovimiento;
 
     @Enumerated(EnumType.STRING)
     private TipoMovimiento tipoMovimiento;

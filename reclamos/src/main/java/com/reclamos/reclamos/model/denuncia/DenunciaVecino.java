@@ -11,7 +11,6 @@ public class DenunciaVecino extends Denuncia {
 
     @ManyToOne
     @JoinColumn(name = "vecino_id")
-    @JsonIgnore
     private Vecino vecino;
 
 
