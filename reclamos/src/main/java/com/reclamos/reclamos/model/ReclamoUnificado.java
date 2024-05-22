@@ -1,4 +1,4 @@
 package com.reclamos.reclamos.model;
 
-public class ReclamoUnificado {
+public class ReclamoUnificado   {
 }
