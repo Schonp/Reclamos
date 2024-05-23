@@ -10,6 +10,14 @@ import java.util.Date;
 @Entity
 public class MovimientoReclamo extends MovimientoDenuncia {
     @ManyToOne
-    @JoinColumn(name="denuncia_id")
+    @JoinColumn(name="reclamo_id")
     private Reclamo reclamo;
+
+    public Reclamo getReclamo() {
+        return reclamo;
+    }
+
+    public void setReclamo(Reclamo reclamo) {
+        this.reclamo = reclamo;
+    }
 }

@@ -6,4 +6,12 @@ import jakarta.persistence.Entity;
 public class ReclamoUnificado extends Reclamo  {
 
     private Long idUnificaco;
+
+    public Long getIdUnificaco() {
+        return idUnificaco;
+    }
+
+    public void setIdUnificaco(Long idUnificaco) {
+        this.idUnificaco = idUnificaco;
+    }
 }

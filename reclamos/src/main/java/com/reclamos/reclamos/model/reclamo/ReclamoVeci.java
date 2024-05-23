@@ -11,4 +11,12 @@ public class ReclamoVeci extends Reclamo {
     @ManyToOne
     @JoinColumn(name = "denunciante_id")
     private Vecino vecino;
+
+    public Vecino getVecino() {
+        return vecino;
+    }
+
+    public void setVecino(Vecino vecino) {
+        this.vecino = vecino;
+    }
 }

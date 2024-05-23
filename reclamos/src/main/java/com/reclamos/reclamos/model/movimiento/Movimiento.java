@@ -6,10 +6,10 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "Movimiento")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Movimiento {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idMovimiento;
 
     @Enumerated(EnumType.STRING)
@@ -21,5 +21,44 @@ public abstract class Movimiento {
     private Date fecha;
 
     private String causa;
-    private int idMovido;
+
+    public Long getIdMovimiento() {
+        return idMovimiento;
+    }
+
+    public void setIdMovimiento(Long idMovimiento) {
+        this.idMovimiento = idMovimiento;
+    }
+
+    public TipoMovimiento getTipoMovimiento() {
+        return tipoMovimiento;
+    }
+
+    public void setTipoMovimiento(TipoMovimiento tipoMovimiento) {
+        this.tipoMovimiento = tipoMovimiento;
+    }
+
+    public String getResponsable() {
+        return responsable;
+    }
+
+    public void setResponsable(String responsable) {
+        this.responsable = responsable;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getCausa() {
+        return causa;
+    }
+
+    public void setCausa(String causa) {
+        this.causa = causa;
+    }
 }

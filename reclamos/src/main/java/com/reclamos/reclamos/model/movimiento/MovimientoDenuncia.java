@@ -12,4 +12,12 @@ public class MovimientoDenuncia extends Movimiento {
     @ManyToOne
     @JoinColumn(name="denuncia_id")
     private Denuncia denuncia;
+
+    public Denuncia getDenuncia() {
+        return denuncia;
+    }
+
+    public void setDenuncia(Denuncia denuncia) {
+        this.denuncia = denuncia;
+    }
 }

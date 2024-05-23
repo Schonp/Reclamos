@@ -12,11 +12,12 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "Denuncia")
 @Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "denuncia")
 public abstract class Denuncia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_denuncia")
     private Long idDenuncia;
     private String descripcion;
     @Enumerated (EnumType.STRING)
@@ -30,5 +31,78 @@ public abstract class Denuncia {
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     private LocalDateTime fechaHora;
+    @Lob
     private byte[] pruebas;
+
+    public Long getIdDenuncia() {
+        return idDenuncia;
+    }
+
+    public void setIdDenuncia(Long idDenuncia) {
+        this.idDenuncia = idDenuncia;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public EstadoDenuncia getEstadoDenuncia() {
+        return estadoDenuncia;
+    }
+
+    public void setEstadoDenuncia(EstadoDenuncia estadoDenuncia) {
+        this.estadoDenuncia = estadoDenuncia;
+    }
+
+    public TipoDenuncia getTipoDenuncia() {
+        return tipoDenuncia;
+    }
+
+    public void setTipoDenuncia(TipoDenuncia tipoDenuncia) {
+        this.tipoDenuncia = tipoDenuncia;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getCausa() {
+        return causa;
+    }
+
+    public void setCausa(String causa) {
+        this.causa = causa;
+    }
+
+    public String getLugar() {
+        return lugar;
+    }
+
+    public void setLugar(String lugar) {
+        this.lugar = lugar;
+    }
+
+    public LocalDateTime getFechaHora() {
+        return fechaHora;
+    }
+
+    public void setFechaHora(LocalDateTime fechaHora) {
+        this.fechaHora = fechaHora;
+    }
+
+    public byte[] getPruebas() {
+        return pruebas;
+    }
+
+    public void setPruebas(byte[] pruebas) {
+        this.pruebas = pruebas;
+    }
 }

@@ -6,11 +6,18 @@ import jakarta.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "denuncia_sitio")
 public abstract class DenunciaSitio extends Denuncia {
 
     @ManyToOne
     @JoinColumn(name = "sitio_id")
-    private Sitio sitio;
+    private Sitio denunciado;
 
+    public Sitio getDenunciado() {
+        return denunciado;
+    }
 
+    public void setDenunciado(Sitio denunciado) {
+        this.denunciado = denunciado;
+    }
 }
