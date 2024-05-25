@@ -1,7 +1,5 @@
 package com.reclamos.reclamos.model;
 
-import com.reclamos.reclamos.model.denuncia.DenunciaSitioVeci;
-import com.reclamos.reclamos.model.denuncia.DenunciaVeciVeci;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -19,13 +17,10 @@ public class Vecino {
     private List<Notificacion> notificaciones;
 
     @OneToMany(mappedBy = "denunciante", cascade = CascadeType.ALL)
-    private List<DenunciaVeciVeci> denunciasHechas;
+    private List<Denuncia> denunciasHechas;
 
     @OneToMany(mappedBy = "denunciado", cascade = CascadeType.ALL)
-    private List<DenunciaVeciVeci> denunciasRecibidas;
-
-    @OneToMany(mappedBy = "denunciante", cascade = CascadeType.ALL)
-    private List<DenunciaSitioVeci> denunciasSitioHechas;
+    private List<Denuncia> denunciasRecibidas;
 
     @OneToOne(mappedBy = "propietario")
     private Sitio sitio;

@@ -1,6 +1,7 @@
-package com.reclamos.reclamos.model.movimiento;
+package com.reclamos.reclamos.model;
 
 import com.reclamos.reclamos.enums.TipoMovimiento;
+import com.reclamos.reclamos.model.Denuncia;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -11,16 +12,20 @@ public abstract class Movimiento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idMovimiento;
-
     @Enumerated(EnumType.STRING)
     private TipoMovimiento tipoMovimiento;
-
     private String responsable;
-
     @Temporal(TemporalType.DATE)
     private Date fecha;
-
     private String causa;
+
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "denuncia_id",nullable = true )
+    private Denuncia denuncia;
+
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "reclamo_id",nullable = true )
+    private Reclamo reclamo;
 
     public Long getIdMovimiento() {
         return idMovimiento;

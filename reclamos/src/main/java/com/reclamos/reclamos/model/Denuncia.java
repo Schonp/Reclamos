@@ -1,4 +1,4 @@
-package com.reclamos.reclamos.model.denuncia;
+package com.reclamos.reclamos.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.reclamos.reclamos.enums.EstadoDenuncia;
@@ -28,6 +28,18 @@ public abstract class Denuncia {
     private String causa;
     private String lugar;
 
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "sitio_id",nullable = true )
+    private Sitio sitioDenunciado;
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "denunciado_id",nullable = true )
+    private Vecino denunciado;
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "denunciante_id",nullable = true )
+    private Vecino denunciante;
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "inspector_id",nullable = true )
+    private Inspector inspector;
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     private LocalDateTime fechaHora;

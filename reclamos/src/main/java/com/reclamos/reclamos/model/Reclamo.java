@@ -1,4 +1,4 @@
-package com.reclamos.reclamos.model.reclamo;
+package com.reclamos.reclamos.model;
 
 import com.reclamos.reclamos.enums.EstadoReclamo;
 import com.reclamos.reclamos.enums.TipoReclamo;
@@ -28,6 +28,14 @@ public class Reclamo {
 
     @Lob
     private byte[] fotos;
+
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "sitio_id",nullable = true )
+    private Vecino vecino;
+
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "sitio_id",nullable = true )
+    private Inspector inspector;
 
     public Long getIdReclamo() {
         return idReclamo;

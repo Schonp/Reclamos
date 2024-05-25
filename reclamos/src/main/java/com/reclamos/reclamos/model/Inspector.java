@@ -1,7 +1,5 @@
 package com.reclamos.reclamos.model;
 
-import com.reclamos.reclamos.model.denuncia.DenunciaSitioIns;
-import com.reclamos.reclamos.model.denuncia.DenunciaVeciIns;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -25,8 +23,9 @@ public class Inspector {
     private Date fechaIngreso;
     @OneToMany(mappedBy = "denunciante", cascade = CascadeType.ALL)
     private List<DenunciaVeciIns> denunciasHechas;
-    @OneToMany(mappedBy = "denunciante", cascade = CascadeType.ALL)
-    private List<DenunciaSitioIns> denunciasSitioHechas;
+
+
+
 
 
     public int getLegajo() {
