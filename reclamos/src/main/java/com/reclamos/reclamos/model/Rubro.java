@@ -5,11 +5,12 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "Rubro")
+@Table(name = "rubro")
 public class Rubro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idRubro;
+
     private String descripcion;
 
     @OneToMany(mappedBy = "rubro")
@@ -17,6 +18,19 @@ public class Rubro {
 
     @OneToMany(mappedBy = "rubro")
     private List<Promocion> promociones;
+
+
+    public Rubro(Long idRubro, String descripcion, List<Inspector> inspectores, List<Promocion> promociones) {
+        this.idRubro = idRubro;
+        this.descripcion = descripcion;
+        this.inspectores = inspectores;
+        this.promociones = promociones;
+    }
+
+    public Rubro() {
+
+    }
+
 
     public Long getIdRubro() {
         return idRubro;

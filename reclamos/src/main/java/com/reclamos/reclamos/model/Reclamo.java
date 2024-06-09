@@ -8,14 +8,16 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "reclamo")
 public class Reclamo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idReclamo;
+
     @ManyToOne
     @JoinColumn(name = "sitio_id")
     private Sitio sitio;
+
     private String descripcion;
 
     @Enumerated(EnumType.STRING)
@@ -30,12 +32,29 @@ public class Reclamo {
     private byte[] fotos;
 
     @ManyToOne(optional = true)
-    @JoinColumn(name = "sitio_id",nullable = true )
+    @JoinColumn(name = "vecino_id", nullable = true)
     private Vecino vecino;
 
     @ManyToOne(optional = true)
-    @JoinColumn(name = "sitio_id",nullable = true )
+    @JoinColumn(name = "inspector_id", nullable = true)
     private Inspector inspector;
+
+    public Reclamo(Long idReclamo, Sitio sitio, String descripcion, TipoReclamo tipoReclamo, EstadoReclamo estadoReclamo, String desperfecto, byte[] fotos, Vecino vecino, Inspector inspector) {
+        this.idReclamo = idReclamo;
+        this.sitio = sitio;
+        this.descripcion = descripcion;
+        this.tipoReclamo = tipoReclamo;
+        this.estadoReclamo = estadoReclamo;
+        this.desperfecto = desperfecto;
+        this.fotos = fotos;
+        this.vecino = vecino;
+        this.inspector = inspector;
+    }
+
+    public Reclamo() {
+
+    }
+
 
     public Long getIdReclamo() {
         return idReclamo;
@@ -91,5 +110,21 @@ public class Reclamo {
 
     public void setFotos(byte[] fotos) {
         this.fotos = fotos;
+    }
+
+    public Vecino getVecino() {
+        return vecino;
+    }
+
+    public void setVecino(Vecino vecino) {
+        this.vecino = vecino;
+    }
+
+    public Inspector getInspector() {
+        return inspector;
+    }
+
+    public void setInspector(Inspector inspector) {
+        this.inspector = inspector;
     }
 }

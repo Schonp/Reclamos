@@ -3,25 +3,35 @@ package com.reclamos.reclamos.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Notificacion")
-
+@Table(name = "notificacion")
 public class Notificacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idNotificacion;
+
     private String descripcion;
 
-    // Relacion con Vecino (Opcional dependiendo de uso)
     @ManyToOne
-    @JoinColumn(name = "vecino_documento", referencedColumnName = "documento", insertable = false, updatable = false)
+    @JoinColumn(name = "vecino_documento", referencedColumnName = "documento")
     private Vecino vecino;
 
-    // Relacion con Inspector (Opcional dependiendo de uso)
     @ManyToOne
-    @JoinColumn(name = "inspector_legajo", referencedColumnName = "legajo", insertable = false, updatable = false)
+    @JoinColumn(name = "inspector_legajo", referencedColumnName = "legajo")
     private Inspector inspector;
 
+    public Notificacion(Long idNotificacion, String descripcion, Vecino vecino, Inspector inspector) {
+        this.idNotificacion = idNotificacion;
+        this.descripcion = descripcion;
+        this.vecino = vecino;
+        this.inspector = inspector;
+    }
+
+    public Notificacion() {
+
+    }
+
     public Long getIdNotificacion() {
+
         return idNotificacion;
     }
 

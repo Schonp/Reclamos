@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 
 import java.util.List;
 @Entity
-@Table(name = "Promocion")
+@Table(name = "promocion")
 public class Promocion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,24 +16,47 @@ public class Promocion {
     private TipoPromocion tipoPromocion;
 
     @ManyToOne
-    @JoinColumn(name = "idSitio", referencedColumnName = "idSitio", insertable = false, updatable = false)
+    @JoinColumn(name = "idSitio", referencedColumnName = "idSitio")
     private Sitio sitio;
+
     @ManyToOne
-    @JoinColumn(name = "idRubro", referencedColumnName = "idRubro", insertable = false, updatable = false)
+    @JoinColumn(name = "idRubro", referencedColumnName = "idRubro")
     private Rubro rubro;
+
     @Lob
     private byte[] fotos;
-    private String descripcion; 
-    private String titulo; 
-    private String horarios; 
+    private String descripcion;
+    private String titulo;
+    private String horarios;
     private String direccion;
     private String contacto;
+
     @ManyToOne
-    @JoinColumn(name = "idVecino", referencedColumnName = "documento", insertable = false, updatable = false)
+    @JoinColumn(name = "idVecino", referencedColumnName = "documento")
     private Vecino vecino;
 
-    @Enumerated (EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     private EstadoPromocion estadoPromocion;
+
+    public Promocion(Long idPromocion, TipoPromocion tipoPromocion, Sitio sitio, Rubro rubro, byte[] fotos, String descripcion, String titulo, String horarios, String direccion, String contacto, Vecino vecino, EstadoPromocion estadoPromocion) {
+
+        this.idPromocion = idPromocion;
+        this.tipoPromocion = tipoPromocion;
+        this.sitio = sitio;
+        this.rubro = rubro;
+        this.fotos = fotos;
+        this.descripcion = descripcion;
+        this.titulo = titulo;
+        this.horarios = horarios;
+        this.direccion = direccion;
+        this.contacto = contacto;
+        this.vecino = vecino;
+        this.estadoPromocion = estadoPromocion;
+    }
+
+    public Promocion() {
+
+    }
 
     public Long getIdPromocion() {
         return idPromocion;

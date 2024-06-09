@@ -11,40 +11,70 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
+
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "denuncia")
-public abstract class Denuncia {
+public class Denuncia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_denuncia")
     private Long idDenuncia;
+
     private String descripcion;
-    @Enumerated (EnumType.STRING)
+
+    @Enumerated(EnumType.STRING)
     private EstadoDenuncia estadoDenuncia;
-    @Enumerated (EnumType.STRING)
+
+    @Enumerated(EnumType.STRING)
     private TipoDenuncia tipoDenuncia;
+
     private String titulo;
     private String causa;
     private String lugar;
 
     @ManyToOne(optional = true)
-    @JoinColumn(name = "sitio_id",nullable = true )
+    @JoinColumn(name = "sitio_id", nullable = true)
     private Sitio sitioDenunciado;
+
     @ManyToOne(optional = true)
-    @JoinColumn(name = "denunciado_id",nullable = true )
+    @JoinColumn(name = "denunciado_id", nullable = true)
     private Vecino denunciado;
+
     @ManyToOne(optional = true)
-    @JoinColumn(name = "denunciante_id",nullable = true )
+    @JoinColumn(name = "denunciante_id", nullable = true)
     private Vecino denunciante;
+
     @ManyToOne(optional = true)
-    @JoinColumn(name = "inspector_id",nullable = true )
+    @JoinColumn(name = "inspector_id", nullable = true)
     private Inspector inspector;
+
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     private LocalDateTime fechaHora;
+
     @Lob
     private byte[] pruebas;
+
+    public Denuncia(Long idDenuncia, String descripcion, EstadoDenuncia estadoDenuncia, TipoDenuncia tipoDenuncia, String titulo, String causa, String lugar, Sitio sitioDenunciado, Vecino denunciado, Vecino denunciante, Inspector inspector, LocalDateTime fechaHora, byte[] pruebas) {
+
+        this.idDenuncia = idDenuncia;
+        this.descripcion = descripcion;
+        this.estadoDenuncia = estadoDenuncia;
+        this.tipoDenuncia = tipoDenuncia;
+        this.titulo = titulo;
+        this.causa = causa;
+        this.lugar = lugar;
+        this.sitioDenunciado = sitioDenunciado;
+        this.denunciado = denunciado;
+        this.denunciante = denunciante;
+        this.inspector = inspector;
+        this.fechaHora = fechaHora;
+        this.pruebas = pruebas;
+    }
+
+    public Denuncia() {
+
+    }
 
     public Long getIdDenuncia() {
         return idDenuncia;
@@ -100,6 +130,38 @@ public abstract class Denuncia {
 
     public void setLugar(String lugar) {
         this.lugar = lugar;
+    }
+
+    public Sitio getSitioDenunciado() {
+        return sitioDenunciado;
+    }
+
+    public void setSitioDenunciado(Sitio sitioDenunciado) {
+        this.sitioDenunciado = sitioDenunciado;
+    }
+
+    public Vecino getDenunciado() {
+        return denunciado;
+    }
+
+    public void setDenunciado(Vecino denunciado) {
+        this.denunciado = denunciado;
+    }
+
+    public Vecino getDenunciante() {
+        return denunciante;
+    }
+
+    public void setDenunciante(Vecino denunciante) {
+        this.denunciante = denunciante;
+    }
+
+    public Inspector getInspector() {
+        return inspector;
+    }
+
+    public void setInspector(Inspector inspector) {
+        this.inspector = inspector;
     }
 
     public LocalDateTime getFechaHora() {

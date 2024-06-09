@@ -10,7 +10,7 @@ import java.util.List;
 public class Inspector {
 
     @Id
-    private int legajo;
+    private Long legajo;
     private String nombre;
     private String apellido;
     private int documento;
@@ -19,20 +19,38 @@ public class Inspector {
     @ManyToOne
     @JoinColumn(name = "rubro_id")
     private Rubro rubro;
+
     @Temporal(TemporalType.DATE)
     private Date fechaIngreso;
-    @OneToMany(mappedBy = "denunciante", cascade = CascadeType.ALL)
-    private List<DenunciaVeciIns> denunciasHechas;
 
+    @OneToMany(mappedBy = "inspector", cascade = CascadeType.ALL)
+    private List<Denuncia> denunciasInspeccionadas;
 
+    @OneToMany(mappedBy = "inspector")
+    private List<Notificacion> notificaciones;
 
+    public Inspector(Long legajo, String nombre, String apellido, int documento, String password, Rubro rubro, Date fechaIngreso, List<Denuncia> denunciasInspeccionadas, List<Notificacion> notificaciones) {
 
+        this.legajo = legajo;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.documento = documento;
+        this.password = password;
+        this.rubro = rubro;
+        this.fechaIngreso = fechaIngreso;
+        this.denunciasInspeccionadas = denunciasInspeccionadas;
+        this.notificaciones = notificaciones;
+    }
 
-    public int getLegajo() {
+    public Inspector() {
+
+    }
+
+    public Long getLegajo() {
         return legajo;
     }
 
-    public void setLegajo(int legajo) {
+    public void setLegajo(Long legajo) {
         this.legajo = legajo;
     }
 
@@ -84,19 +102,19 @@ public class Inspector {
         this.fechaIngreso = fechaIngreso;
     }
 
-    public List<DenunciaVeciIns> getDenunciasHechas() {
-        return denunciasHechas;
+    public List<Denuncia> getDenunciasInspeccionadas() {
+        return denunciasInspeccionadas;
     }
 
-    public void setDenunciasHechas(List<DenunciaVeciIns> denunciasHechas) {
-        this.denunciasHechas = denunciasHechas;
+    public void setDenunciasInspeccionadas(List<Denuncia> denunciasInspeccionadas) {
+        this.denunciasInspeccionadas = denunciasInspeccionadas;
     }
 
-    public List<DenunciaSitioIns> getDenunciasSitioHechas() {
-        return denunciasSitioHechas;
+    public List<Notificacion> getNotificaciones() {
+        return notificaciones;
     }
 
-    public void setDenunciasSitioHechas(List<DenunciaSitioIns> denunciasSitioHechas) {
-        this.denunciasSitioHechas = denunciasSitioHechas;
+    public void setNotificaciones(List<Notificacion> notificaciones) {
+        this.notificaciones = notificaciones;
     }
 }

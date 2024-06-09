@@ -7,25 +7,43 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Movimiento {
+@Table(name = "movimiento")
+public class Movimiento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idMovimiento;
+
     @Enumerated(EnumType.STRING)
     private TipoMovimiento tipoMovimiento;
+
     private String responsable;
+
     @Temporal(TemporalType.DATE)
     private Date fecha;
+
     private String causa;
 
     @ManyToOne(optional = true)
-    @JoinColumn(name = "denuncia_id",nullable = true )
+    @JoinColumn(name = "denuncia_id", nullable = true)
     private Denuncia denuncia;
 
     @ManyToOne(optional = true)
-    @JoinColumn(name = "reclamo_id",nullable = true )
+    @JoinColumn(name = "reclamo_id", nullable = true)
     private Reclamo reclamo;
+
+    public Movimiento(Long idMovimiento, TipoMovimiento tipoMovimiento, String responsable, Date fecha, String causa, Denuncia denuncia, Reclamo reclamo) {
+        this.idMovimiento = idMovimiento;
+        this.tipoMovimiento = tipoMovimiento;
+        this.responsable = responsable;
+        this.fecha = fecha;
+        this.causa = causa;
+        this.denuncia = denuncia;
+        this.reclamo = reclamo;
+    }
+
+    public Movimiento() {
+
+    }
 
     public Long getIdMovimiento() {
         return idMovimiento;
@@ -65,5 +83,21 @@ public abstract class Movimiento {
 
     public void setCausa(String causa) {
         this.causa = causa;
+    }
+
+    public Denuncia getDenuncia() {
+        return denuncia;
+    }
+
+    public void setDenuncia(Denuncia denuncia) {
+        this.denuncia = denuncia;
+    }
+
+    public Reclamo getReclamo() {
+        return reclamo;
+    }
+
+    public void setReclamo(Reclamo reclamo) {
+        this.reclamo = reclamo;
     }
 }

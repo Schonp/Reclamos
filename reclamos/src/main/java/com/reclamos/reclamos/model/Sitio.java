@@ -7,29 +7,63 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
-@Table(name = "Sitio")
+@Table(name = "sitio")
 public class Sitio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idSitio;
+
     private String latitud;
     private String altitud;
     private String direccion;
     private String entreCalleA;
     private String entreCalleB;
     private String descripcion;
+
     @OneToOne
     @JoinColumn(name = "propietario_documento")
     private Vecino propietario;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Timestamp apertura;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Timestamp cierre;
+
     @Enumerated(EnumType.STRING)
     private TipoSitio tipo;
 
     @OneToMany(mappedBy = "sitio")
     private List<Promocion> promociones;
+
+    @OneToMany(mappedBy = "sitioDenunciado")
+    private List<Denuncia> denuncias;
+
+    @OneToMany(mappedBy = "sitio")
+    private List<Reclamo> reclamos;
+
+
+    public Sitio(Long idSitio, String latitud, String altitud, String direccion, String entreCalleA, String entreCalleB, String descripcion, Vecino propietario, Timestamp apertura, Timestamp cierre, TipoSitio tipo, List<Promocion> promociones, List<Denuncia> denuncias, List<Reclamo> reclamos) {
+        this.idSitio = idSitio;
+        this.latitud = latitud;
+        this.altitud = altitud;
+        this.direccion = direccion;
+        this.entreCalleA = entreCalleA;
+        this.entreCalleB = entreCalleB;
+        this.descripcion = descripcion;
+        this.propietario = propietario;
+        this.apertura = apertura;
+        this.cierre = cierre;
+        this.tipo = tipo;
+        this.promociones = promociones;
+        this.denuncias = denuncias;
+        this.reclamos = reclamos;
+    }
+
+    public Sitio() {
+
+    }
+
 
     public Long getIdSitio() {
         return idSitio;
@@ -125,5 +159,21 @@ public class Sitio {
 
     public void setPromociones(List<Promocion> promociones) {
         this.promociones = promociones;
+    }
+
+    public List<Denuncia> getDenuncias() {
+        return denuncias;
+    }
+
+    public void setDenuncias(List<Denuncia> denuncias) {
+        this.denuncias = denuncias;
+    }
+
+    public List<Reclamo> getReclamos() {
+        return reclamos;
+    }
+
+    public void setReclamos(List<Reclamo> reclamos) {
+        this.reclamos = reclamos;
     }
 }

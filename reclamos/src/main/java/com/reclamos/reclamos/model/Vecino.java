@@ -5,10 +5,11 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "Vecino")
+@Table(name = "vecino")
 public class Vecino {
     @Id
-    private int documento;
+    private Long documento;
+
     private String nombre;
     private String apellido;
     private String direccion;
@@ -25,11 +26,30 @@ public class Vecino {
     @OneToOne(mappedBy = "propietario")
     private Sitio sitio;
 
-    public int getDocumento() {
+    @OneToMany(mappedBy = "vecino")
+    private List<Reclamo> reclamos;
+
+    public Vecino(Long documento, String nombre, String apellido, String direccion, List<Notificacion> notificaciones, List<Denuncia> denunciasHechas, List<Denuncia> denunciasRecibidas, Sitio sitio, List<Reclamo> reclamos) {
+        this.documento = documento;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.direccion = direccion;
+        this.notificaciones = notificaciones;
+        this.denunciasHechas = denunciasHechas;
+        this.denunciasRecibidas = denunciasRecibidas;
+        this.sitio = sitio;
+        this.reclamos = reclamos;
+    }
+
+    public Vecino() {
+
+    }
+
+    public Long getDocumento() {
         return documento;
     }
 
-    public void setDocumento(int documento) {
+    public void setDocumento(Long documento) {
         this.documento = documento;
     }
 
@@ -65,28 +85,20 @@ public class Vecino {
         this.notificaciones = notificaciones;
     }
 
-    public List<DenunciaVeciVeci> getDenunciasHechas() {
+    public List<Denuncia> getDenunciasHechas() {
         return denunciasHechas;
     }
 
-    public void setDenunciasHechas(List<DenunciaVeciVeci> denunciasHechas) {
+    public void setDenunciasHechas(List<Denuncia> denunciasHechas) {
         this.denunciasHechas = denunciasHechas;
     }
 
-    public List<DenunciaVeciVeci> getDenunciasRecibidas() {
+    public List<Denuncia> getDenunciasRecibidas() {
         return denunciasRecibidas;
     }
 
-    public void setDenunciasRecibidas(List<DenunciaVeciVeci> denunciasRecibidas) {
+    public void setDenunciasRecibidas(List<Denuncia> denunciasRecibidas) {
         this.denunciasRecibidas = denunciasRecibidas;
-    }
-
-    public List<DenunciaSitioVeci> getDenunciasSitioHechas() {
-        return denunciasSitioHechas;
-    }
-
-    public void setDenunciasSitioHechas(List<DenunciaSitioVeci> denunciasSitioHechas) {
-        this.denunciasSitioHechas = denunciasSitioHechas;
     }
 
     public Sitio getSitio() {
@@ -95,5 +107,13 @@ public class Vecino {
 
     public void setSitio(Sitio sitio) {
         this.sitio = sitio;
+    }
+
+    public List<Reclamo> getReclamos() {
+        return reclamos;
+    }
+
+    public void setReclamos(List<Reclamo> reclamos) {
+        this.reclamos = reclamos;
     }
 }
