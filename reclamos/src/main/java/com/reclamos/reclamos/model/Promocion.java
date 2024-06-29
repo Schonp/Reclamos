@@ -1,5 +1,6 @@
 package com.reclamos.reclamos.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.reclamos.reclamos.enums.EstadoPromocion;
 import com.reclamos.reclamos.enums.TipoPromocion;
 import jakarta.persistence.*;
@@ -17,10 +18,12 @@ public class Promocion {
 
     @ManyToOne
     @JoinColumn(name = "idSitio", referencedColumnName = "idSitio")
+    @JsonIgnoreProperties("promociones")
     private Sitio sitio;
 
     @ManyToOne
     @JoinColumn(name = "idRubro", referencedColumnName = "idRubro")
+    @JsonIgnoreProperties("promociones")
     private Rubro rubro;
 
     @Lob
@@ -33,10 +36,12 @@ public class Promocion {
 
     @ManyToOne
     @JoinColumn(name = "idVecino", referencedColumnName = "documento")
+    @JsonIgnoreProperties("promociones")
     private Vecino vecino;
 
     @Enumerated(EnumType.STRING)
     private EstadoPromocion estadoPromocion;
+
 
     public Promocion(Long idPromocion, TipoPromocion tipoPromocion, Sitio sitio, Rubro rubro, byte[] fotos, String descripcion, String titulo, String horarios, String direccion, String contacto, Vecino vecino, EstadoPromocion estadoPromocion) {
 

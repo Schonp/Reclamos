@@ -1,5 +1,6 @@
 package com.reclamos.reclamos.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.reclamos.reclamos.enums.TipoSitio;
 import jakarta.persistence.*;
 
@@ -22,6 +23,7 @@ public class Sitio {
 
     @OneToOne
     @JoinColumn(name = "propietario_documento")
+    @JsonIgnoreProperties("sitio")
     private Vecino propietario;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -34,13 +36,17 @@ public class Sitio {
     private TipoSitio tipo;
 
     @OneToMany(mappedBy = "sitio")
+    @JsonIgnoreProperties("sitio")
     private List<Promocion> promociones;
 
     @OneToMany(mappedBy = "sitioDenunciado")
+    @JsonIgnoreProperties("sitioDenunciado")
     private List<Denuncia> denuncias;
 
     @OneToMany(mappedBy = "sitio")
+    @JsonIgnoreProperties("sitio")
     private List<Reclamo> reclamos;
+
 
 
     public Sitio(Long idSitio, String latitud, String altitud, String direccion, String entreCalleA, String entreCalleB, String descripcion, Vecino propietario, Timestamp apertura, Timestamp cierre, TipoSitio tipo, List<Promocion> promociones, List<Denuncia> denuncias, List<Reclamo> reclamos) {

@@ -1,5 +1,6 @@
 package com.reclamos.reclamos.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -14,9 +15,11 @@ public class Rubro {
     private String descripcion;
 
     @OneToMany(mappedBy = "rubro")
+    @JsonIgnoreProperties("rubro")
     private List<Inspector> inspectores;
 
     @OneToMany(mappedBy = "rubro")
+    @JsonIgnoreProperties("rubro")
     private List<Promocion> promociones;
 
 

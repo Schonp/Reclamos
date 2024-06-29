@@ -1,14 +1,16 @@
 package com.reclamos.reclamos.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "Inspector")
+@Table(name = "inspector")
 public class Inspector {
-
     @Id
     private Long legajo;
     private String nombre;
@@ -18,18 +20,26 @@ public class Inspector {
 
     @ManyToOne
     @JoinColumn(name = "rubro_id")
+    @JsonIgnoreProperties("inspectores")
     private Rubro rubro;
 
     @Temporal(TemporalType.DATE)
     private Date fechaIngreso;
 
-    @OneToMany(mappedBy = "inspector", cascade = CascadeType.ALL)
-    private List<Denuncia> denunciasInspeccionadas;
+    @OneToMany(mappedBy = "inspector")
+    @JsonManagedReference
+    private List<Denuncia> denunciasRecibidas;
 
     @OneToMany(mappedBy = "inspector")
+    @JsonIgnoreProperties("inspector")
     private List<Notificacion> notificaciones;
 
-    public Inspector(Long legajo, String nombre, String apellido, int documento, String password, Rubro rubro, Date fechaIngreso, List<Denuncia> denunciasInspeccionadas, List<Notificacion> notificaciones) {
+    @OneToMany(mappedBy = "inspector")
+    @JsonManagedReference
+    private List<Reclamo> reclamos;
+
+
+    public Inspector(Long legajo, String nombre, String apellido, int documento, String password, Rubro rubro, Date fechaIngreso, List<Denuncia> denunciasInspeccionadas, List<Notificacion> notificaciones, List<Reclamo> reclamos) {
 
         this.legajo = legajo;
         this.nombre = nombre;
@@ -38,8 +48,9 @@ public class Inspector {
         this.password = password;
         this.rubro = rubro;
         this.fechaIngreso = fechaIngreso;
-        this.denunciasInspeccionadas = denunciasInspeccionadas;
+        this.denunciasRecibidas = denunciasRecibidas;
         this.notificaciones = notificaciones;
+        this.reclamos = reclamos;
     }
 
     public Inspector() {
@@ -102,12 +113,12 @@ public class Inspector {
         this.fechaIngreso = fechaIngreso;
     }
 
-    public List<Denuncia> getDenunciasInspeccionadas() {
-        return denunciasInspeccionadas;
+    public List<Denuncia> getDenunciasRecibidas() {
+        return denunciasRecibidas;
     }
 
-    public void setDenunciasInspeccionadas(List<Denuncia> denunciasInspeccionadas) {
-        this.denunciasInspeccionadas = denunciasInspeccionadas;
+    public void setDenunciasRecibidas(List<Denuncia> denunciasRecibidas) {
+        this.denunciasRecibidas = denunciasRecibidas;
     }
 
     public List<Notificacion> getNotificaciones() {
@@ -116,5 +127,13 @@ public class Inspector {
 
     public void setNotificaciones(List<Notificacion> notificaciones) {
         this.notificaciones = notificaciones;
+    }
+
+    public List<Reclamo> getReclamos() {
+        return reclamos;
+    }
+
+    public void setReclamos(List<Reclamo> reclamos) {
+        this.reclamos = reclamos;
     }
 }

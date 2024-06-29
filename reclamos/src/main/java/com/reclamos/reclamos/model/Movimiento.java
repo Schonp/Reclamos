@@ -1,5 +1,6 @@
 package com.reclamos.reclamos.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.reclamos.reclamos.enums.TipoMovimiento;
 import com.reclamos.reclamos.model.Denuncia;
 import jakarta.persistence.*;
@@ -25,11 +26,14 @@ public class Movimiento {
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "denuncia_id", nullable = true)
+    @JsonIgnoreProperties("movimientos")
     private Denuncia denuncia;
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "reclamo_id", nullable = true)
+    @JsonIgnoreProperties("movimientos")
     private Reclamo reclamo;
+
 
     public Movimiento(Long idMovimiento, TipoMovimiento tipoMovimiento, String responsable, Date fecha, String causa, Denuncia denuncia, Reclamo reclamo) {
         this.idMovimiento = idMovimiento;

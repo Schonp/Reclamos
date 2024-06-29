@@ -1,6 +1,7 @@
 package com.reclamos.reclamos.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.reclamos.reclamos.enums.EstadoDenuncia;
 import com.reclamos.reclamos.enums.TipoDenuncia;
 import com.reclamos.reclamos.model.Vecino;
@@ -34,18 +35,22 @@ public class Denuncia {
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "sitio_id", nullable = true)
+    @JsonIgnoreProperties("denuncias")
     private Sitio sitioDenunciado;
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "denunciado_id", nullable = true)
+    @JsonIgnoreProperties({"denunciasHechas", "denunciasRecibidas", "sitio", "reclamos"})
     private Vecino denunciado;
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "denunciante_id", nullable = true)
+    @JsonIgnoreProperties({"denunciasHechas", "denunciasRecibidas", "sitio", "reclamos"})
     private Vecino denunciante;
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "inspector_id", nullable = true)
+    @JsonIgnoreProperties({"denunciasRecibidas", "notificaciones", "reclamos"})
     private Inspector inspector;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -54,6 +59,9 @@ public class Denuncia {
 
     @Lob
     private byte[] pruebas;
+
+
+
 
     public Denuncia(Long idDenuncia, String descripcion, EstadoDenuncia estadoDenuncia, TipoDenuncia tipoDenuncia, String titulo, String causa, String lugar, Sitio sitioDenunciado, Vecino denunciado, Vecino denunciante, Inspector inspector, LocalDateTime fechaHora, byte[] pruebas) {
 

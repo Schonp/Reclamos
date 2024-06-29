@@ -1,5 +1,6 @@
 package com.reclamos.reclamos.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.reclamos.reclamos.enums.EstadoReclamo;
 import com.reclamos.reclamos.enums.TipoReclamo;
 import com.reclamos.reclamos.model.Sitio;
@@ -16,6 +17,7 @@ public class Reclamo {
 
     @ManyToOne
     @JoinColumn(name = "sitio_id")
+    @JsonIgnoreProperties("reclamos")
     private Sitio sitio;
 
     private String descripcion;
@@ -33,11 +35,14 @@ public class Reclamo {
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "vecino_id", nullable = true)
+    @JsonIgnoreProperties("reclamos")
     private Vecino vecino;
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "inspector_id", nullable = true)
+    @JsonIgnoreProperties("reclamos")
     private Inspector inspector;
+
 
     public Reclamo(Long idReclamo, Sitio sitio, String descripcion, TipoReclamo tipoReclamo, EstadoReclamo estadoReclamo, String desperfecto, byte[] fotos, Vecino vecino, Inspector inspector) {
         this.idReclamo = idReclamo;

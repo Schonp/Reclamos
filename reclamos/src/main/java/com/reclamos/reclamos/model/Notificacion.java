@@ -1,5 +1,6 @@
 package com.reclamos.reclamos.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,11 +14,14 @@ public class Notificacion {
 
     @ManyToOne
     @JoinColumn(name = "vecino_documento", referencedColumnName = "documento")
+    @JsonIgnoreProperties("notificaciones")
     private Vecino vecino;
 
     @ManyToOne
     @JoinColumn(name = "inspector_legajo", referencedColumnName = "legajo")
+    @JsonIgnoreProperties("notificaciones")
     private Inspector inspector;
+
 
     public Notificacion(Long idNotificacion, String descripcion, Vecino vecino, Inspector inspector) {
         this.idNotificacion = idNotificacion;

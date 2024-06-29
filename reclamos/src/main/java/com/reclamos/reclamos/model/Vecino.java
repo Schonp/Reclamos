@@ -1,5 +1,7 @@
 package com.reclamos.reclamos.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -15,19 +17,30 @@ public class Vecino {
     private String direccion;
 
     @OneToMany(mappedBy = "vecino")
+    @JsonIgnoreProperties("vecino")
     private List<Notificacion> notificaciones;
 
     @OneToMany(mappedBy = "denunciante", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<Denuncia> denunciasHechas;
 
     @OneToMany(mappedBy = "denunciado", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<Denuncia> denunciasRecibidas;
 
     @OneToOne(mappedBy = "propietario")
+    @JsonIgnoreProperties("propietario")
     private Sitio sitio;
 
     @OneToMany(mappedBy = "vecino")
-    private List<Reclamo> reclamos;
+    @JsonIgnoreProperties("vecino")
+    private List<Reclamo>reclamos;
+
+    @OneToMany(mappedBy = "vecino")
+    @JsonIgnoreProperties("vecino")
+    private List<Promocion> promociones;
+
+
 
     public Vecino(Long documento, String nombre, String apellido, String direccion, List<Notificacion> notificaciones, List<Denuncia> denunciasHechas, List<Denuncia> denunciasRecibidas, Sitio sitio, List<Reclamo> reclamos) {
         this.documento = documento;
