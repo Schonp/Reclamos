@@ -19,12 +19,12 @@ public class Promocion {
 
     @ManyToOne
     @JoinColumn(name = "idSitio", referencedColumnName = "idSitio")
-    @JsonIgnoreProperties("promociones")
+    @JsonBackReference
     private Sitio sitio;
 
     @ManyToOne
     @JoinColumn(name = "idRubro", referencedColumnName = "idRubro")
-    @JsonIgnoreProperties("promociones")
+    @JsonBackReference
     private Rubro rubro;
 
     @Lob
