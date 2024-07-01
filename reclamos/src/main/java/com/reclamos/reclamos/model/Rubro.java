@@ -1,5 +1,6 @@
 package com.reclamos.reclamos.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
@@ -15,11 +16,11 @@ public class Rubro {
     private String descripcion;
 
     @OneToMany(mappedBy = "rubro")
-    @JsonIgnoreProperties("rubro")
+    @JsonBackReference
     private List<Inspector> inspectores;
 
     @OneToMany(mappedBy = "rubro")
-    @JsonIgnoreProperties("rubro")
+    @JsonBackReference
     private List<Promocion> promociones;
 
 

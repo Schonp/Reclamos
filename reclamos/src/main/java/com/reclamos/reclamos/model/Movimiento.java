@@ -1,5 +1,6 @@
 package com.reclamos.reclamos.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.reclamos.reclamos.enums.TipoMovimiento;
 import com.reclamos.reclamos.model.Denuncia;
@@ -26,12 +27,12 @@ public class Movimiento {
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "denuncia_id", nullable = true)
-    @JsonIgnoreProperties("movimientos")
+    @JsonBackReference
     private Denuncia denuncia;
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "reclamo_id", nullable = true)
-    @JsonIgnoreProperties("movimientos")
+    @JsonBackReference
     private Reclamo reclamo;
 
 

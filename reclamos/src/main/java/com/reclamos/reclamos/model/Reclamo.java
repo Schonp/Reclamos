@@ -1,5 +1,6 @@
 package com.reclamos.reclamos.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.reclamos.reclamos.enums.EstadoReclamo;
 import com.reclamos.reclamos.enums.TipoReclamo;
@@ -17,7 +18,7 @@ public class Reclamo {
 
     @ManyToOne
     @JoinColumn(name = "sitio_id")
-    @JsonIgnoreProperties("reclamos")
+    @JsonBackReference
     private Sitio sitio;
 
     private String descripcion;
@@ -35,12 +36,12 @@ public class Reclamo {
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "vecino_id", nullable = true)
-    @JsonIgnoreProperties("reclamos")
+    @JsonBackReference
     private Vecino vecino;
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "inspector_id", nullable = true)
-    @JsonIgnoreProperties("reclamos")
+    @JsonBackReference
     private Inspector inspector;
 
 

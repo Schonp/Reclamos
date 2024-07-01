@@ -20,22 +20,22 @@ public class Inspector {
 
     @ManyToOne
     @JoinColumn(name = "rubro_id")
-    @JsonIgnoreProperties("inspectores")
+    @JsonBackReference
     private Rubro rubro;
 
     @Temporal(TemporalType.DATE)
     private Date fechaIngreso;
 
     @OneToMany(mappedBy = "inspector")
-    @JsonManagedReference
+    @JsonBackReference
     private List<Denuncia> denunciasRecibidas;
 
     @OneToMany(mappedBy = "inspector")
-    @JsonIgnoreProperties("inspector")
+    @JsonBackReference
     private List<Notificacion> notificaciones;
 
     @OneToMany(mappedBy = "inspector")
-    @JsonManagedReference
+    @JsonBackReference
     private List<Reclamo> reclamos;
 
 

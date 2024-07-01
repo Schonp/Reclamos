@@ -1,5 +1,6 @@
 package com.reclamos.reclamos.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.reclamos.reclamos.enums.TipoSitio;
 import jakarta.persistence.*;
@@ -22,8 +23,8 @@ public class Sitio {
     private String descripcion;
 
     @OneToOne
-    @JoinColumn(name = "propietario_documento")
-    @JsonIgnoreProperties("sitio")
+    @JoinColumn(name = "propietario_documento", nullable = true)
+    @JsonIgnoreProperties({"sitios", "notificaciones"})
     private Vecino propietario;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -36,15 +37,15 @@ public class Sitio {
     private TipoSitio tipo;
 
     @OneToMany(mappedBy = "sitio")
-    @JsonIgnoreProperties("sitio")
+    @JsonBackReference
     private List<Promocion> promociones;
 
     @OneToMany(mappedBy = "sitioDenunciado")
-    @JsonIgnoreProperties("sitioDenunciado")
+    @JsonBackReference
     private List<Denuncia> denuncias;
 
     @OneToMany(mappedBy = "sitio")
-    @JsonIgnoreProperties("sitio")
+    @JsonBackReference
     private List<Reclamo> reclamos;
 
 

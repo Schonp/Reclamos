@@ -1,5 +1,6 @@
 package com.reclamos.reclamos.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.reclamos.reclamos.enums.EstadoDenuncia;
@@ -35,22 +36,22 @@ public class Denuncia {
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "sitio_id", nullable = true)
-    @JsonIgnoreProperties("denuncias")
+    @JsonBackReference
     private Sitio sitioDenunciado;
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "denunciado_id", nullable = true)
-    @JsonIgnoreProperties({"denunciasHechas", "denunciasRecibidas", "sitio", "reclamos"})
+    @JsonBackReference
     private Vecino denunciado;
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "denunciante_id", nullable = true)
-    @JsonIgnoreProperties({"denunciasHechas", "denunciasRecibidas", "sitio", "reclamos"})
+    @JsonBackReference
     private Vecino denunciante;
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "inspector_id", nullable = true)
-    @JsonIgnoreProperties({"denunciasRecibidas", "notificaciones", "reclamos"})
+    @JsonBackReference
     private Inspector inspector;
 
     @Temporal(TemporalType.TIMESTAMP)

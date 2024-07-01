@@ -1,5 +1,6 @@
 package com.reclamos.reclamos.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
@@ -14,12 +15,12 @@ public class Notificacion {
 
     @ManyToOne
     @JoinColumn(name = "vecino_documento", referencedColumnName = "documento")
-    @JsonIgnoreProperties("notificaciones")
+    @JsonBackReference
     private Vecino vecino;
 
     @ManyToOne
     @JoinColumn(name = "inspector_legajo", referencedColumnName = "legajo")
-    @JsonIgnoreProperties("notificaciones")
+    @JsonBackReference
     private Inspector inspector;
 
 

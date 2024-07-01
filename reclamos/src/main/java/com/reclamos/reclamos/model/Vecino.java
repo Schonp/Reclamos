@@ -17,7 +17,7 @@ public class Vecino {
     private String direccion;
 
     @OneToMany(mappedBy = "vecino")
-    @JsonIgnoreProperties("vecino")
+    @JsonBackReference
     private List<Notificacion> notificaciones;
 
     @OneToMany(mappedBy = "denunciante", cascade = CascadeType.ALL)
@@ -29,15 +29,15 @@ public class Vecino {
     private List<Denuncia> denunciasRecibidas;
 
     @OneToOne(mappedBy = "propietario")
-    @JsonIgnoreProperties("propietario")
+    @JsonBackReference
     private Sitio sitio;
 
     @OneToMany(mappedBy = "vecino")
-    @JsonIgnoreProperties("vecino")
+    @JsonBackReference
     private List<Reclamo>reclamos;
 
     @OneToMany(mappedBy = "vecino")
-    @JsonIgnoreProperties("vecino")
+    @JsonBackReference
     private List<Promocion> promociones;
 
 

@@ -1,5 +1,6 @@
 package com.reclamos.reclamos.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.reclamos.reclamos.enums.EstadoPromocion;
 import com.reclamos.reclamos.enums.TipoPromocion;
@@ -36,7 +37,7 @@ public class Promocion {
 
     @ManyToOne
     @JoinColumn(name = "idVecino", referencedColumnName = "documento")
-    @JsonIgnoreProperties("promociones")
+    @JsonBackReference
     private Vecino vecino;
 
     @Enumerated(EnumType.STRING)
