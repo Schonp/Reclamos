@@ -15,6 +15,8 @@ public class Vecino {
     private String nombre;
     private String apellido;
     private String direccion;
+    private String email;
+    private String password;
 
     @OneToMany(mappedBy = "vecino")
     @JsonIgnoreProperties("vecino")
@@ -41,17 +43,43 @@ public class Vecino {
     private List<Promocion> promociones;
 
 
-
-    public Vecino(Long documento, String nombre, String apellido, String direccion, List<Notificacion> notificaciones, List<Denuncia> denunciasHechas, List<Denuncia> denunciasRecibidas, Sitio sitio, List<Reclamo> reclamos) {
+    public Vecino(Long documento, String apellido, String nombre, String direccion, String email, List<Notificacion> notificaciones, String password, List<Denuncia> denunciasHechas, List<Denuncia> denunciasRecibidas, Sitio sitio, List<Reclamo> reclamos, List<Promocion> promociones) {
         this.documento = documento;
-        this.nombre = nombre;
         this.apellido = apellido;
+        this.nombre = nombre;
         this.direccion = direccion;
+        this.email = email;
         this.notificaciones = notificaciones;
+        this.password = password;
         this.denunciasHechas = denunciasHechas;
         this.denunciasRecibidas = denunciasRecibidas;
         this.sitio = sitio;
         this.reclamos = reclamos;
+        this.promociones = promociones;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<Promocion> getPromociones() {
+        return promociones;
+    }
+
+    public void setPromociones(List<Promocion> promociones) {
+        this.promociones = promociones;
     }
 
     public Vecino() {
