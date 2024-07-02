@@ -1,5 +1,6 @@
 package com.reclamos.reclamos.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.reclamos.reclamos.enums.EstadoPromocion;
 import com.reclamos.reclamos.enums.TipoPromocion;
@@ -18,12 +19,12 @@ public class Promocion {
 
     @ManyToOne
     @JoinColumn(name = "idSitio", referencedColumnName = "idSitio")
-    @JsonIgnoreProperties("promociones")
+    @JsonIgnore
     private Sitio sitio;
 
     @ManyToOne
     @JoinColumn(name = "idRubro", referencedColumnName = "idRubro")
-    @JsonIgnoreProperties("promociones")
+    @JsonIgnore
     private Rubro rubro;
 
     @Lob
@@ -36,7 +37,7 @@ public class Promocion {
 
     @ManyToOne
     @JoinColumn(name = "idVecino", referencedColumnName = "documento")
-    @JsonIgnoreProperties("promociones")
+    @JsonIgnore
     private Vecino vecino;
 
     @Enumerated(EnumType.STRING)

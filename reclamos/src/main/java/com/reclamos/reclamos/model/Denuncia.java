@@ -35,22 +35,22 @@ public class Denuncia {
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "sitio_id", nullable = true)
-    @JsonIgnoreProperties("denuncias")
+    @JsonIgnoreProperties({"propietario", "promociones", "denuncias", "reclamos"})
     private Sitio sitioDenunciado;
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "denunciado_id", nullable = true)
-    @JsonIgnoreProperties({"denunciasHechas", "denunciasRecibidas", "sitio", "reclamos"})
+    @JsonIgnoreProperties({"notificaciones", "sitio", "reclamos", "promociones","denuncias"})
     private Vecino denunciado;
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "denunciante_id", nullable = true)
-    @JsonIgnoreProperties({"denunciasHechas", "denunciasRecibidas", "sitio", "reclamos"})
+    @JsonIgnoreProperties({"notificaciones", "sitio", "reclamos", "promociones","denuncias"})
     private Vecino denunciante;
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "inspector_id", nullable = true)
-    @JsonIgnoreProperties({"denunciasRecibidas", "notificaciones", "reclamos"})
+    @JsonIgnoreProperties({"rubro", "denunciasRecibidas", "notificaciones", "reclamos","denuncias","promociones"})
     private Inspector inspector;
 
     @Temporal(TemporalType.TIMESTAMP)
