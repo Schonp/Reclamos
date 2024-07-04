@@ -33,5 +33,13 @@ public class NotificacionService {
     public void deleteNotificacion(Long id) {
         notificacionRepository.deleteById(id);
     }
+
+    public List<Notificacion> getNotificacionesByVecino(Long documento) {
+        return notificacionRepository.findByVecinoDocumento(documento);
+    }
+
+    public List<Notificacion> getNotificacionesByInspector(Long legajo) {
+        return notificacionRepository.findByInspectorLegajo(legajo);
+    }
 }
 

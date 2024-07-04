@@ -35,5 +35,15 @@ public class NotificacionController {
     public void deleteNotificacion(@PathVariable Long id) {
         notificacionService.deleteNotificacion(id);
     }
+
+    @GetMapping("/vecino/{documento}")
+    public List<Notificacion> getNotificacionesByVecino(@PathVariable Long documento) {
+        return notificacionService.getNotificacionesByVecino(documento);
+    }
+
+    @GetMapping("/inspector/{legajo}")
+    public List<Notificacion> getNotificacionesByInspector(@PathVariable Long legajo) {
+        return notificacionService.getNotificacionesByInspector(legajo);
+    }
 }
 

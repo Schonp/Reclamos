@@ -66,4 +66,8 @@ public class DenunciaController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al procesar archivos");
         }
     }
+    @GetMapping("/denunciante/{documento}")
+    public List<Denuncia> getDenunciasByDenunciante(@PathVariable Long documento) {
+        return denunciaService.getDenunciasByDenunciante(documento);
+    }
 }

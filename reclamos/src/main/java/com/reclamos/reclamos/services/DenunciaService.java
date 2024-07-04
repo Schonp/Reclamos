@@ -99,4 +99,9 @@ public class DenunciaService {
 
         denunciaRepository.save(denuncia);
     }
+
+    public List<Denuncia> getDenunciasByDenunciante(Long denuncianteDocumento) {
+        return denunciaRepository.findByDenuncianteDocumento(denuncianteDocumento);
+    }
+
 }

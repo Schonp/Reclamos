@@ -2,5 +2,9 @@ package com.reclamos.reclamos.repositorios;
 import com.reclamos.reclamos.model.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface DenunciaRepository extends JpaRepository<Denuncia, Long> {}
+import java.util.List;
+
+public interface DenunciaRepository extends JpaRepository<Denuncia, Long> {
+    List<Denuncia> findByDenuncianteDocumento(Long denuncianteDocumento);
+}
 
