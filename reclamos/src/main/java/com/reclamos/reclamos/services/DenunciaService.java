@@ -56,7 +56,7 @@ public class DenunciaService {
         denunciaRepository.deleteById(id);
     }
 
-    public void saveDenuncia(String descripcion, EstadoDenuncia estadoDenuncia, TipoDenuncia tipoDenuncia, String titulo, String causa, String lugar, Long sitioId, Long denunciadoId, Long denuncianteId, Long inspectorId, MultipartFile file) throws IOException {
+    public void saveDenuncia(String descripcion, EstadoDenuncia estadoDenuncia, TipoDenuncia tipoDenuncia, String titulo, String causa, String lugar, Long sitioId, Long denunciadoId, Long denuncianteId, Long inspectorId, MultipartFile[] files) throws IOException {
         Denuncia denuncia = new Denuncia();
         denuncia.setDescripcion(descripcion);
         denuncia.setEstadoDenuncia(estadoDenuncia);
@@ -66,28 +66,35 @@ public class DenunciaService {
         denuncia.setLugar(lugar);
 
         if (sitioId != null) {
-            Sitio sitio = sitioRepository.findById(sitioId).orElse(null);
+            Sitio sitio = sitioRepository.findById(sitioId).orElseThrow(() -> new RuntimeException("Sitio not found"));
             denuncia.setSitioDenunciado(sitio);
         }
 
         if (denunciadoId != null) {
-            Vecino denunciado = vecinoRepository.findById(denunciadoId).orElse(null);
+            Vecino denunciado = vecinoRepository.findById(denunciadoId).orElseThrow(() -> new RuntimeException("Vecino not found"));
             denuncia.setDenunciado(denunciado);
         }
 
         if (denuncianteId != null) {
-            Vecino denunciante = vecinoRepository.findById(denuncianteId).orElse(null);
+            Vecino denunciante = vecinoRepository.findById(denuncianteId).orElseThrow(() -> new RuntimeException("Vecino not found"));
             denuncia.setDenunciante(denunciante);
         }
 
         if (inspectorId != null) {
-            Inspector inspector = inspectorRepository.findById(inspectorId).orElse(null);
+            Inspector inspector = inspectorRepository.findById(inspectorId).orElseThrow(() -> new RuntimeException("Inspector not found"));
             denuncia.setInspector(inspector);
         }
 
-        if (file != null && !file.isEmpty()) {
-            byte[] pruebas = file.getBytes();
-            denuncia.setPruebas(pruebas);
+        // Manejo de múltiples archivos
+        if (files != null && files.length > 0) {
+            for (MultipartFile file : files) {
+                byte[] fileContent = file.getBytes();
+                // Puedes almacenar el archivo en la base de datos, en el sistema de archivos, etc.
+                // Aquí simplemente imprimimos el nombre del archivo y su tamaño
+                System.out.println("Archivo recibido: " + file.getOriginalFilename() + " tamaño: " + fileContent.length);
+                // Denuncia puede tener un campo de colección para almacenar las pruebas
+                // denuncia.addPrueba(fileContent); // Si se maneja como una colección de bytes
+            }
         }
 
         denunciaRepository.save(denuncia);

@@ -46,23 +46,24 @@ public class DenunciaController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadFile(
+    public ResponseEntity<String> uploadDenuncia(
             @RequestParam("descripcion") String descripcion,
             @RequestParam("estadoDenuncia") EstadoDenuncia estadoDenuncia,
             @RequestParam("tipoDenuncia") TipoDenuncia tipoDenuncia,
             @RequestParam("titulo") String titulo,
             @RequestParam("causa") String causa,
             @RequestParam("lugar") String lugar,
-            @RequestParam("sitioId") Long sitioId,
-            @RequestParam("denunciadoId") Long denunciadoId,
-            @RequestParam("denuncianteId") Long denuncianteId,
-            @RequestParam("inspectorId") Long inspectorId,
-            @RequestParam("file") MultipartFile file) {
+            @RequestParam(value = "sitioId", required = false) Long sitioId,
+            @RequestParam(value = "denunciadoId", required = false) Long denunciadoId,
+            @RequestParam(value = "denuncianteId", required = false) Long denuncianteId,
+            @RequestParam(value = "inspectorId", required = false) Long inspectorId,
+            @RequestParam(value = "pruebas",required = false) MultipartFile[] pruebas) {
+
         try {
-            denunciaService.saveDenuncia(descripcion, estadoDenuncia, tipoDenuncia, titulo, causa, lugar, sitioId, denunciadoId, denuncianteId, inspectorId, file);
-            return ResponseEntity.status(HttpStatus.OK).body("File uploaded successfully");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload file");
+            denunciaService.saveDenuncia(descripcion, estadoDenuncia, tipoDenuncia, titulo, causa, lugar, sitioId, denunciadoId, denuncianteId, inspectorId, pruebas);
+            return ResponseEntity.status(HttpStatus.OK).body("Denuncia subida exitosamente");
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al procesar archivos");
         }
     }
 }

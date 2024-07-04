@@ -58,6 +58,7 @@ public class Denuncia {
     private LocalDateTime fechaHora;
 
     @Lob
+    @Column(name = "pruebas", columnDefinition = "LONGBLOB")
     private byte[] pruebas;
 
 
